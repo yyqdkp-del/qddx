@@ -63,6 +63,13 @@ const associationIntroBrief =
 
 function ShowcaseTabList({ rows }: { rows: ShowcaseRow[] }) {
   const data = rows.slice(0, 5)
+  if (data.length === 0) {
+    return (
+      <ul className="rounded-md border border-border border-dashed border-muted-foreground/40 p-4 text-sm text-muted-foreground">
+        <li>暂无列表数据</li>
+      </ul>
+    )
+  }
   return (
     <ul className="divide-y divide-border overflow-hidden rounded-md border border-border">
       {data.map((item) => (
@@ -217,7 +224,11 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-lg border border-border bg-card shadow-sm lg:col-span-7">
-              <Tabs value={showcaseTab} onValueChange={(v) => setShowcaseTab(v as "news" | "policy" | "charity" | "culture")} className="w-full gap-0">
+              <Tabs
+                defaultValue="news"
+                onValueChange={(v) => setShowcaseTab(v as "news" | "policy" | "charity" | "culture")}
+                className="w-full gap-0"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
                   <TabsList className="h-auto min-h-9 w-full flex-wrap justify-start gap-1 bg-secondary/80 p-1 sm:w-auto sm:flex-1 data-[orientation=horizontal]:justify-start">
                     <TabsTrigger
@@ -250,20 +261,18 @@ export default function HomePage() {
                     <span aria-hidden>→</span>
                   </Link>
                 </div>
-                <div className="p-3 sm:p-4">
-                  <TabsContent value="news" className="m-0 min-h-[12rem] focus-visible:outline-none">
-                    <ShowcaseTabList rows={newsShowcaseRows} />
-                  </TabsContent>
-                  <TabsContent value="policy" className="m-0 min-h-[12rem] focus-visible:outline-none">
-                    <ShowcaseTabList rows={policyShowcaseRows} />
-                  </TabsContent>
-                  <TabsContent value="charity" className="m-0 min-h-[12rem] focus-visible:outline-none">
-                    <ShowcaseTabList rows={charityShowcaseRows} />
-                  </TabsContent>
-                  <TabsContent value="culture" className="m-0 min-h-[12rem] focus-visible:outline-none">
-                    <ShowcaseTabList rows={cultureShowcaseRows} />
-                  </TabsContent>
-                </div>
+                <TabsContent value="news" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
+                  <ShowcaseTabList rows={newsShowcaseRows} />
+                </TabsContent>
+                <TabsContent value="policy" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
+                  <ShowcaseTabList rows={policyShowcaseRows} />
+                </TabsContent>
+                <TabsContent value="charity" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
+                  <ShowcaseTabList rows={charityShowcaseRows} />
+                </TabsContent>
+                <TabsContent value="culture" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
+                  <ShowcaseTabList rows={cultureShowcaseRows} />
+                </TabsContent>
               </Tabs>
             </div>
           </div>
