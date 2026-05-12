@@ -20,7 +20,7 @@ export function NewsSection() {
             newsItems.map((item) => (
               <div
                 key={item.id}
-                className="flex gap-4 rounded-lg border border-border bg-card p-5 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
+                className="flex gap-4 rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-accent/50 hover:shadow-md"
               >
                 <div className="flex shrink-0 flex-col items-center rounded-md bg-primary px-3 py-2 text-primary-foreground">
                   <span className="text-lg font-bold leading-tight">{item.date.split("-")[2]}</span>
@@ -31,7 +31,7 @@ export function NewsSection() {
                 <div className="min-w-0 flex-1">
                   <span className="inline-block rounded-sm bg-accent/20 px-2 py-0.5 text-[10px] font-medium text-accent-foreground">{item.category}</span>
                   <h3 className="mt-1 text-sm font-semibold leading-snug text-card-foreground">
-                    <Link href={`/news/${item.id}`} className="line-clamp-2 hover:text-primary">
+                    <Link href={`/news/${item.id}`} className="line-clamp-2 transition-colors duration-300 hover:text-primary">
                       {item.title}
                     </Link>
                   </h3>
@@ -45,7 +45,7 @@ export function NewsSection() {
         <div className="mt-8 text-center">
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 rounded-md border border-primary bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center gap-2 rounded-md border border-primary bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-all duration-300 hover:bg-primary/90 hover:shadow-md"
           >
             查看更多新闻
             <ArrowRight size={16} aria-hidden />

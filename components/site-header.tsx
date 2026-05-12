@@ -63,22 +63,22 @@ const mainNavigation: NavMainItem[] = [
     href: "/temples",
     matchPrefix: true,
     children: [
-      { label: "济南道观", href: "#jingnan" },
+      { label: "济南道观", href: "/" },
       { label: "青岛道观", href: "/temples" },
-      { label: "淄博道观", href: "#zibo" },
-      { label: "枣庄道观", href: "#zaozhuang" },
-      { label: "东营道观", href: "#dongying" },
-      { label: "烟台道观", href: "#yantai" },
-      { label: "潍坊道观", href: "#weifang" },
-      { label: "济宁道观", href: "#jining" },
-      { label: "泰安道观", href: "#taian" },
-      { label: "威海道观", href: "#weihai" },
-      { label: "日照道观", href: "#rizhao" },
-      { label: "临沂道观", href: "#linyi" },
-      { label: "德州道观", href: "#dezhou" },
-      { label: "聊城道观", href: "#liaocheng" },
-      { label: "滨州道观", href: "#binzhou" },
-      { label: "菏泽道观", href: "#heze" },
+      { label: "淄博道观", href: "/" },
+      { label: "枣庄道观", href: "/" },
+      { label: "东营道观", href: "/" },
+      { label: "烟台道观", href: "/" },
+      { label: "潍坊道观", href: "/" },
+      { label: "济宁道观", href: "/" },
+      { label: "泰安道观", href: "/" },
+      { label: "威海道观", href: "/" },
+      { label: "日照道观", href: "/" },
+      { label: "临沂道观", href: "/" },
+      { label: "德州道观", href: "/" },
+      { label: "聊城道观", href: "/" },
+      { label: "滨州道观", href: "/" },
+      { label: "菏泽道观", href: "/" },
     ],
   },
   {
@@ -124,6 +124,7 @@ function isNavActive(item: NavMainItem, pathname: string): boolean {
   if (selfMatch) return true
   if (item.children) {
     return item.children.some((c) => {
+      if (c.href === "/") return false
       if (c.href.startsWith("#")) return false
       if (c.href.includes("#")) return pathname === c.href.split("#")[0]
       return pathname === c.href || pathname.startsWith(c.href + "/")
@@ -142,7 +143,10 @@ function NavDropdownLink({ item }: { item: NavDropdownItem }) {
     )
   }
   return (
-    <Link href={item.href} className="block rounded-md px-3 py-2 text-sm text-card-foreground transition-colors hover:bg-muted hover:text-primary">
+    <Link
+      href={item.href}
+      className="block rounded-md px-3 py-2 text-sm text-card-foreground transition-all duration-300 hover:bg-muted hover:text-primary"
+    >
       {item.label}
     </Link>
   )
@@ -212,7 +216,7 @@ export function SiteHeader() {
       {/* 品牌与主导航行（保留原站绿底配色类名体系） */}
       <div className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:py-4">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-95">
             <TaoistLogo />
             <div className="flex flex-col">
               <span className="text-lg font-bold leading-tight tracking-wider lg:text-xl">青岛市道教协会</span>
@@ -230,7 +234,7 @@ export function SiteHeader() {
                     <li key={item.label} className="relative">
                       <Link
                         href={item.href}
-                        className={`relative flex items-center whitespace-nowrap px-2 py-2 text-[13px] font-medium tracking-wide transition-colors hover:text-accent xl:px-2.5 ${
+                        className={`relative flex items-center whitespace-nowrap px-2 py-2 text-[13px] font-medium tracking-wide transition-all duration-300 hover:text-accent xl:px-2.5 ${
                           active ? "text-accent" : "text-primary-foreground"
                         }`}
                       >
@@ -248,7 +252,7 @@ export function SiteHeader() {
                     <div className="flex items-center gap-0.5">
                       <Link
                         href={item.href}
-                        className={`relative flex items-center whitespace-nowrap px-2 py-2 text-[13px] font-medium tracking-wide transition-colors hover:text-accent xl:px-2.5 ${
+                        className={`relative flex items-center whitespace-nowrap px-2 py-2 text-[13px] font-medium tracking-wide transition-all duration-300 hover:text-accent xl:px-2.5 ${
                           active ? "text-accent" : "text-primary-foreground"
                         }`}
                       >
@@ -305,7 +309,7 @@ export function SiteHeader() {
                     </button>
                     {expanded === item.label && (
                       <div className="bg-primary/90 px-4 pb-3 pt-1 text-primary-foreground">
-                        <Link href={item.href} className="mb-2 block py-2 text-xs font-medium underline-offset-4 hover:text-accent" onClick={() => setMobileOpen(false)}>
+                        <Link href={item.href} className="mb-2 block py-2 text-xs font-medium underline-offset-4 transition-all duration-300 hover:text-accent" onClick={() => setMobileOpen(false)}>
                           进入「{item.label}」频道
                         </Link>
                         {item.children.map((child) => (
@@ -313,7 +317,7 @@ export function SiteHeader() {
                             {child.href.startsWith("#") ? (
                               <span className="block py-2 pl-4 text-xs opacity-60">{child.label}</span>
                             ) : (
-                              <Link href={child.href} className="block py-2 pl-4 text-xs hover:text-accent" onClick={() => setMobileOpen(false)}>
+                              <Link href={child.href} className="block py-2 pl-4 text-xs transition-all duration-300 hover:text-accent" onClick={() => setMobileOpen(false)}>
                                 {child.label}
                               </Link>
                             )}
@@ -326,7 +330,7 @@ export function SiteHeader() {
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className={`block px-6 py-3 text-sm transition-colors hover:bg-primary-foreground/5 ${
+                      className={`block px-6 py-3 text-sm transition-all duration-300 hover:bg-primary-foreground/5 ${
                         isNavActive(item, pathname) ? "text-accent" : ""
                       }`}
                       onClick={() => setMobileOpen(false)}

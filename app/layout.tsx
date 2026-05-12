@@ -12,8 +12,9 @@ const notoSerifSC = Noto_Serif_SC({
 })
 
 export const metadata: Metadata = {
-  title: '青岛市道教协会 - 弘道扬德 济世利人',
-  description: '青岛市道教协会官方网站，致力于弘扬道教文化、促进道教事业健康发展，服务社会、利益人群。',
+  title: '青岛市道教协会 - 弘扬大道，正己化人',
+  description:
+    '青岛市道教协会官方网站。提供青岛道教新闻动态、政策法规、慈善公益、道教文化导读及办事服务指南。',
   keywords: '青岛道教,道教协会,崂山太清宫,道教文化,道观',
 }
 

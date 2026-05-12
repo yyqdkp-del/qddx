@@ -39,7 +39,6 @@ const footerPrimaryNav = [
 export function SiteFooter() {
   return (
     <>
-      {/* 友情链接区：结构与省道协「友情链接」一栏相同（独立于深色版权条之上） */}
       <section aria-label="友情链接" className="border-y border-border bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-7xl px-4 py-5">
           <div className="flex flex-wrap items-start gap-x-4 gap-y-3">
@@ -51,7 +50,7 @@ export function SiteFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+                  className="text-muted-foreground underline-offset-4 transition-colors duration-300 hover:text-primary hover:underline"
                 >
                   {link.label}
                 </a>
@@ -61,99 +60,61 @@ export function SiteFooter() {
         </div>
       </section>
 
-      <footer className="bg-primary text-primary-foreground">
-        <div className="cloud-divider -mb-1" />
+      <footer className="border-t border-accent/25 bg-[#0f1a14] text-zinc-100">
+        <div className="cloud-divider -mb-1 opacity-40" />
 
         <div className="mx-auto max-w-7xl px-4 py-10 lg:py-12">
-          {/* 底部结构与省道协 footer：左侧为主导航复述 + B-1/B-2 法务与地址；右侧为双二维码占位 */}
           <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-12">
             <div className="min-w-0 flex-1 space-y-6">
-              {/* 复述主导航 */}
-              <ul className="flex flex-wrap gap-x-1 gap-y-2 border-b border-primary-foreground/10 pb-4 text-[13px]">
+              <ul className="flex flex-wrap justify-center gap-x-1 gap-y-2 border-b border-zinc-600/50 pb-4 text-[13px] lg:justify-start">
                 {footerPrimaryNav.map((nav, index) => (
                   <li key={nav.href + nav.label} className="flex items-center whitespace-nowrap">
                     {index > 0 && (
-                      <span className="mx-3 text-accent/35 select-none" aria-hidden>
+                      <span className="mx-3 text-accent/40 select-none" aria-hidden>
                         |
                       </span>
                     )}
-                    <Link href={nav.href} className="opacity-85 transition-opacity hover:opacity-100 hover:text-accent">
+                    <Link
+                      href={nav.href}
+                      className="text-zinc-200 opacity-90 transition-all duration-300 hover:text-accent hover:opacity-100"
+                    >
                       {nav.label}
                     </Link>
                   </li>
                 ))}
               </ul>
 
-              <div className="space-y-4 text-xs leading-relaxed opacity-85 md:text-sm">
-                {/* B-1：版权与许可一行（对应省道协 .B-1） */}
-                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-4">
-                  <span>
-                    <b className="text-primary-foreground">版权所有：</b>
-                    <Link href="/" className="underline-offset-4 hover:text-accent hover:underline">
-                      青岛市道教协会
-                    </Link>
-                  </span>
-                  <span>
-                    <b className="text-primary-foreground">备案号：</b>
-                    <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow noopener noreferrer" className="underline-offset-4 hover:text-accent hover:underline">
-                      鲁ICP备XXXXXXXX号
-                    </a>
-                  </span>
-                  <span className="whitespace-normal">
-                    <b className="text-primary-foreground">互联网宗教信息服务许可证编号：</b>
-                    <span className="whitespace-nowrap opacity-95">鲁(示例)XXXXXXX</span>
-                  </span>
-                </div>
-
-                {/* B-2：联系信息（对应省道协 .B-2.B-1） */}
-                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-5">
-                  <span>
-                    <b className="text-primary-foreground">地址：</b>
-                    青岛市市南区太平路19号（天后宫内 · 联系地址示意）
-                  </span>
-                  <span>
-                    <b className="text-primary-foreground">电话：</b>
-                    <a href="tel:053282877666" className="underline-offset-4 hover:text-accent hover:underline">
-                      0532-82877666
-                    </a>
-                  </span>
-                  <span>
-                    <b className="text-primary-foreground">邮箱：</b>
-                    <a href="mailto:qddjxh@163.com" className="underline-offset-4 hover:text-accent hover:underline">
-                      qddjxh@163.com
-                    </a>
-                  </span>
-                </div>
-
-                {/* 技术支持行（对标省道协最下行 .B-1） */}
-                <div>
-                  <span className="opacity-70">
-                    <b className="text-primary-foreground opacity-95">技术支持：</b>
-                    <span className="text-primary-foreground/80">青岛市道教协会信息化建设（占位）</span>
-                  </span>
-                </div>
-              </div>
+              <p className="text-center text-xs text-zinc-500 lg:text-left">技术支持：青岛市道教协会信息化建设（演示）</p>
             </div>
 
-            {/* 右侧二维码：官网 / 公众号 双列 */}
             <div className="flex shrink-0 flex-row flex-wrap justify-center gap-6 lg:flex-col xl:flex-row xl:justify-end">
-              <div className="flex w-[120px] flex-col items-center gap-2 text-center text-xs opacity-85">
-                <div className="flex h-[120px] w-[120px] items-center justify-center rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 text-[10px] leading-tight text-primary-foreground/60">
+              <div className="flex w-[120px] flex-col items-center gap-2 text-center text-xs text-zinc-400">
+                <div className="flex h-[120px] w-[120px] items-center justify-center rounded-lg border border-zinc-600/60 bg-zinc-900/80 text-[10px] leading-tight text-zinc-500">
                   官网
                   <br />
                   二维码占位
                 </div>
-                <span>青岛市道协官网</span>
+                <span className="text-zinc-300">青岛市道协官网</span>
               </div>
-              <div className="flex w-[120px] flex-col items-center gap-2 text-center text-xs opacity-85">
-                <div className="flex h-[120px] w-[120px] items-center justify-center rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 text-[10px] leading-tight text-primary-foreground/60">
+              <div className="flex w-[120px] flex-col items-center gap-2 text-center text-xs text-zinc-400">
+                <div className="flex h-[120px] w-[120px] items-center justify-center rounded-lg border border-zinc-600/60 bg-zinc-900/80 text-[10px] leading-tight text-zinc-500">
                   公众号
                   <br />
                   二维码占位
                 </div>
-                <span>青岛市道协公众号</span>
+                <span className="text-zinc-300">青岛市道协公众号</span>
               </div>
             </div>
+          </div>
+
+          <div className="mt-10 border-t border-zinc-700/60 pt-8 text-center text-xs leading-relaxed text-zinc-300 md:text-sm">
+            <p className="text-sm font-semibold tracking-wide text-zinc-50">© 2026 青岛市道教协会 版权所有</p>
+            <p className="mt-3">
+              地址：山东省青岛市市南区太平路19号 <span className="text-zinc-600">|</span> 电话：0532-8286XXXX
+            </p>
+            <p className="mt-2">
+              鲁ICP备XXXXXXX号 <span className="text-zinc-600">|</span> 鲁公网安备 XXXXXXX号
+            </p>
           </div>
         </div>
       </footer>

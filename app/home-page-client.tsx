@@ -28,8 +28,8 @@ function ShowcaseTabList({ rows }: { rows: HomeShowcaseRow[] }) {
     <ul className="divide-y divide-border overflow-hidden rounded-md border border-border">
       {data.map((item) => (
         <li key={item.id} className="border-b border-border last:border-b-0">
-          <div className="flex flex-wrap items-center gap-3 px-4 py-3 transition-colors hover:bg-muted/60">
-            <Link href={item.href} className="min-w-0 flex-1 text-sm font-medium text-card-foreground line-clamp-2 hover:text-primary">
+          <div className="flex flex-wrap items-center gap-3 rounded-md px-4 py-3 transition-all duration-300 hover:bg-muted/60 hover:shadow-md">
+            <Link href={item.href} className="min-w-0 flex-1 text-sm font-medium text-card-foreground line-clamp-2 transition-colors hover:text-primary">
               {item.title}
             </Link>
             <time className="shrink-0 text-xs tabular-nums text-muted-foreground" dateTime={item.date}>
@@ -62,7 +62,7 @@ function TwinBannerStripe({
         <Link
           href={href}
           aria-label={ariaLabel}
-          className="group block overflow-hidden rounded-lg border-2 border-accent/50 bg-gradient-to-br from-primary via-primary to-primary/90 shadow-md transition-all hover:border-accent hover:shadow-lg"
+          className="group block overflow-hidden rounded-lg border-2 border-accent/50 bg-gradient-to-br from-primary via-primary to-primary/90 shadow-md transition-all duration-300 hover:border-accent hover:shadow-lg"
         >
           <div className="px-6 py-10 text-center md:px-10 md:py-12">
             <h3 className="text-xl font-bold tracking-wide text-primary-foreground md:text-2xl">{title}</h3>
@@ -184,7 +184,7 @@ export default function HomePageClient({
                       道教文化
                     </TabsTrigger>
                   </TabsList>
-                  <Link href={showcaseMoreHref} className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-primary hover:text-accent">
+                  <Link href={showcaseMoreHref} className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                     <span>更多</span>
                     <span aria-hidden>→</span>
                   </Link>
@@ -218,12 +218,12 @@ export default function HomePageClient({
       <section className="bg-muted/30 py-10 md:py-12">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-3">
           {/* box-1 协会简介 */}
-          <article className="rounded-lg border border-border bg-card p-5 shadow-sm">
+          <article className="rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
               <h3 className="text-base font-bold text-card-foreground">
                 <span className="text-primary">协会</span>简介
               </h3>
-              <Link href="/about" className="text-xs font-medium text-primary hover:text-accent">
+              <Link href="/about" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                 更多 →
               </Link>
             </div>
@@ -234,12 +234,12 @@ export default function HomePageClient({
           </article>
 
           {/* box-2 规章制度 */}
-          <article className="rounded-lg border border-border bg-card p-5 shadow-sm">
+          <article className="rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
               <h3 className="text-base font-bold text-card-foreground">
                 <span className="text-primary">规章</span>制度
               </h3>
-              <Link href="/policies" className="text-xs font-medium text-primary hover:text-accent">
+              <Link href="/policies" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                 更多 →
               </Link>
             </div>
@@ -249,7 +249,7 @@ export default function HomePageClient({
               ) : (
                 policyList.map((policy) => (
                   <li key={policy.id}>
-                    <Link href={`/policies/${policy.id}`} className="flex gap-2 text-muted-foreground transition-colors hover:text-primary">
+                    <Link href={`/policies/${policy.id}`} className="flex gap-2 rounded-md px-1 py-0.5 text-muted-foreground transition-all duration-300 hover:bg-muted/50 hover:text-primary hover:shadow-sm">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
                       <span className="line-clamp-2">{policy.title}</span>
                     </Link>
@@ -260,19 +260,19 @@ export default function HomePageClient({
           </article>
 
           {/* box-3 服务大厅 */}
-          <article className="rounded-lg border border-border bg-card p-5 shadow-sm">
+          <article className="rounded-lg border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
               <h3 className="text-base font-bold text-card-foreground">
                 <span className="text-primary">服务</span>大厅
               </h3>
-              <Link href="/contact" className="text-xs font-medium text-primary hover:text-accent">
+              <Link href="/contact" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                 更多 →
               </Link>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <Link
                 href="/policies"
-                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
+                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all duration-300 hover:border-accent/50 hover:shadow-md"
               >
                 <div>
                   <h4 className="text-base font-bold text-card-foreground">规范化管理表格与制度</h4>
@@ -287,7 +287,7 @@ export default function HomePageClient({
               </Link>
               <Link
                 href="/contact"
-                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
+                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all duration-300 hover:border-accent/50 hover:shadow-md"
               >
                 <div>
                   <h4 className="text-base font-bold text-card-foreground">教务与公益信息公示</h4>
@@ -321,12 +321,12 @@ export default function HomePageClient({
                 <h3 className="text-lg font-bold text-foreground">
                   <span className="text-primary">山东</span>道观
                 </h3>
-                <Link href="/temples" className="text-xs font-medium text-primary hover:text-accent">
+                <Link href="/temples" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                   更多 →
                 </Link>
               </div>
               <div className="grid gap-6 md:grid-cols-5">
-                <Link href="/temples" className="relative block aspect-square overflow-hidden rounded-lg border border-border bg-muted md:col-span-2">
+                <Link href="/temples" className="relative block aspect-square overflow-hidden rounded-lg border border-border bg-muted transition-all duration-300 hover:shadow-md md:col-span-2">
                   <Image src="/images/banner-2.jpg" alt="青岛道教宫观电子地图占位" fill className="object-cover" sizes="(min-width: 768px) 240px, 100vw" />
                 </Link>
                 <div className="flex flex-col gap-4 md:col-span-3">
@@ -338,7 +338,7 @@ export default function HomePageClient({
                     </button>
                   </form>
                   {templeMain && (
-                    <Link href={`/temples/${templeMain.id}`} className="flex gap-3 rounded-lg border border-border bg-card p-3 shadow-sm transition-all hover:border-accent/40 hover:shadow-md">
+                    <Link href={`/temples/${templeMain.id}`} className="flex gap-3 rounded-lg border border-border bg-card p-3 shadow-sm transition-all duration-300 hover:border-accent/40 hover:shadow-md">
                       <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-md border border-border bg-muted">
                         <Image src={templeMain.image} alt={templeMain.name} fill className="object-cover" sizes="128px" />
                       </div>
@@ -350,7 +350,7 @@ export default function HomePageClient({
                   )}
                   <div className="grid gap-2 sm:grid-cols-2">
                     {templeSide.map((tp) => (
-                      <Link key={tp.id} href={`/temples/${tp.id}`} className="flex items-start gap-2 text-xs text-muted-foreground hover:text-primary">
+                      <Link key={tp.id} href={`/temples/${tp.id}`} className="flex items-start gap-2 rounded-md px-1 py-0.5 text-xs text-muted-foreground transition-all duration-300 hover:bg-muted/50 hover:text-primary hover:shadow-sm">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
                         <span className="line-clamp-2">{tp.name}</span>
                       </Link>
@@ -365,13 +365,13 @@ export default function HomePageClient({
                 <h3 className="text-lg font-bold text-foreground">
                   <span className="text-primary">道教</span>音乐
                 </h3>
-                <Link href="/culture#art" className="text-xs font-medium text-primary hover:text-accent">
+                <Link href="/culture#art" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                   更多 →
                 </Link>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {musicBoxes.map((m) => (
-                  <Link key={m.title} href={m.href} className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-accent/40 hover:shadow-md">
+                  <Link key={m.title} href={m.href} className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-300 hover:border-accent/40 hover:shadow-md">
                     <div className="relative aspect-[4/3] bg-muted">
                       <Image src={m.image} alt={m.title} fill className="object-cover opacity-95 transition-opacity group-hover:opacity-80" sizes="(min-width: 1024px) 240px, 50vw" />
                     </div>
@@ -400,13 +400,13 @@ export default function HomePageClient({
                 <h3 className="text-lg font-bold text-foreground">
                   <span className="text-primary">玄门</span>仙踪
                 </h3>
-                <Link href="/culture/knowledge" className="text-xs font-medium text-primary hover:text-accent">
+                <Link href="/culture/knowledge" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                   更多 →
                 </Link>
               </div>
               <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-2">
                 {immortalTraces.map((trace) => (
-                  <Link key={trace.href} href={trace.href} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                  <Link key={trace.href} href={trace.href} className="flex items-center gap-2 rounded-md px-1 py-1 text-sm text-muted-foreground transition-all duration-300 hover:bg-muted/50 hover:text-primary hover:shadow-sm">
                     <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
                     <span className="line-clamp-1">{trace.title}</span>
                   </Link>
@@ -419,7 +419,7 @@ export default function HomePageClient({
                 <h3 className="text-lg font-bold text-foreground">
                   <span className="text-primary">道教</span>书画
                 </h3>
-                <Link href="/culture/classics" className="text-xs font-medium text-primary hover:text-accent">
+                <Link href="/culture/classics" className="text-xs font-medium text-primary transition-all duration-300 hover:text-accent">
                   更多 →
                 </Link>
               </div>
@@ -433,7 +433,7 @@ export default function HomePageClient({
                     <Link
                       key={paint.id}
                       href={`/culture/classics/${paint.id}`}
-                      className="group w-[200px] shrink-0 overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
+                      className="group w-[200px] shrink-0 overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-300 hover:border-accent/40 hover:shadow-md"
                     >
                       <div className="relative aspect-[4/5] bg-muted">
                         <Image src="/images/taoist-culture.jpg" alt={paint.title} fill className="object-cover opacity-95 transition-opacity group-hover:opacity-85" sizes="200px" />
@@ -466,7 +466,7 @@ export default function HomePageClient({
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {wonderlandSlides.map((slide) => (
-              <figure key={slide.label} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+              <figure key={slide.label} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-md">
                 <div className="relative aspect-[4/3] bg-muted">
                   <Image src={slide.img} alt={slide.label} fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
                 </div>
