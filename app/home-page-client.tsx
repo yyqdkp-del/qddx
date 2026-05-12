@@ -1,20 +1,19 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { HeroCarousel, heroCarouselSlides } from "@/components/home/hero-carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  templeEntries,
-  classicList,
-  policyList,
-  getHomeNewsShowcaseRows,
-  getHomePolicyShowcaseRows,
-  getHomeCharityShowcaseRows,
-  getHomeCultureShowcaseRows,
-} from "@/lib/data/qingdao-mock"
+import { templeEntries, classicList, policyList } from "@/lib/data/qingdao-mock"
 import type { HomeShowcaseRow } from "@/lib/data/qingdao-mock"
+
+export type HomePageShowcaseProps = {
+  newsRows: HomeShowcaseRow[]
+  policyRows: HomeShowcaseRow[]
+  charityRows: HomeShowcaseRow[]
+  cultureRows: HomeShowcaseRow[]
+}
 
 function ShowcaseTabList({ rows }: { rows: HomeShowcaseRow[] }) {
   if (!rows || rows.length === 0) {
@@ -65,14 +64,14 @@ function TwinBannerStripe({ href, ariaLabel }: { href: string; ariaLabel: string
   )
 }
 
-export default function HomePageClient() {
+export default function HomePageClient({
+  newsRows,
+  policyRows,
+  charityRows,
+  cultureRows,
+}: HomePageShowcaseProps) {
   const [carouselCaptionIndex, setCarouselCaptionIndex] = useState(0)
   const [showcaseTab, setShowcaseTab] = useState<"news" | "policy" | "charity" | "culture">("news")
-
-  const newsShowcaseRows = useMemo(() => getHomeNewsShowcaseRows(5), [])
-  const policyShowcaseRows = useMemo(() => getHomePolicyShowcaseRows(5), [])
-  const charityShowcaseRows = useMemo(() => getHomeCharityShowcaseRows(5), [])
-  const cultureShowcaseRows = useMemo(() => getHomeCultureShowcaseRows(5), [])
 
   const showcaseMoreHref =
     showcaseTab === "news"
@@ -177,16 +176,16 @@ export default function HomePageClient() {
                   </Link>
                 </div>
                 <TabsContent value="news" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
-                  <ShowcaseTabList rows={newsShowcaseRows} />
+                  <ShowcaseTabList rows={newsRows} />
                 </TabsContent>
                 <TabsContent value="policy" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
-                  <ShowcaseTabList rows={policyShowcaseRows} />
+                  <ShowcaseTabList rows={policyRows} />
                 </TabsContent>
                 <TabsContent value="charity" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
-                  <ShowcaseTabList rows={charityShowcaseRows} />
+                  <ShowcaseTabList rows={charityRows} />
                 </TabsContent>
                 <TabsContent value="culture" className="m-0 min-h-[12rem] px-3 py-3 focus-visible:outline-none sm:px-4 sm:py-4">
-                  <ShowcaseTabList rows={cultureShowcaseRows} />
+                  <ShowcaseTabList rows={cultureRows} />
                 </TabsContent>
               </Tabs>
             </div>
