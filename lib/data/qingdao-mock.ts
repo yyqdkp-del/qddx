@@ -570,6 +570,114 @@ export const classicArticles: Record<string, DocArticle> = {
   },
 }
 
+/** 首页右侧四 Tab 列表行（统一 title / date / href，供新闻·政策·慈善·文化频道复用） */
+export type HomeShowcaseRow = {
+  id: string
+  title: string
+  date: string
+  href: string
+}
+
+/** 新闻动态：优先 newsArticles（权威正文元数据），否则回退 newsList */
+export function getHomeNewsShowcaseRows(max = 5): HomeShowcaseRow[] {
+  const fromArticles = Object.entries(newsArticles)
+    .map(([id, article]) => ({
+      id,
+      title: article.title,
+      date: article.date,
+      href: `/news/${id}`,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+  if (fromArticles.length > 0) return fromArticles.slice(0, max)
+  const fromList = newsList
+    .map((n) => ({
+      id: n.id,
+      title: n.title,
+      date: n.date,
+      href: `/news/${n.id}`,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+  return fromList.slice(0, max)
+}
+
+/** 首页「新闻动态」区块卡片（含分类与摘要，供 NewsSection 使用） */
+export type HomeNewsSectionItem = {
+  id: string
+  title: string
+  date: string
+  category: string
+  excerpt: string
+}
+
+export function getHomeNewsSectionItems(max = 4): HomeNewsSectionItem[] {
+  const fromArticles = Object.entries(newsArticles)
+    .map(([id, article]) => {
+      const row = newsList.find((n) => n.id === id)
+      return {
+        id,
+        title: article.title,
+        date: article.date,
+        category: article.category,
+        excerpt: row?.excerpt ?? article.content[0]?.slice(0, 160) ?? "",
+      }
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+  if (fromArticles.length > 0) return fromArticles.slice(0, max)
+  return newsList
+    .map((n) => ({
+      id: n.id,
+      title: n.title,
+      date: n.date,
+      category: n.category,
+      excerpt: n.excerpt,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, max)
+}
+
+/** 政策法规：policyList */
+export function getHomePolicyShowcaseRows(max = 5): HomeShowcaseRow[] {
+  return policyList
+    .map((p) => ({
+      id: p.id,
+      title: p.title,
+      date: p.date,
+      href: `/policies/${p.id}`,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, max)
+}
+
+/** 慈善公益：charityList */
+export function getHomeCharityShowcaseRows(max = 5): HomeShowcaseRow[] {
+  return charityList
+    .map((c) => ({
+      id: c.id,
+      title: c.title,
+      date: c.date,
+      href: `/charity/${c.id}`,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, max)
+}
+
+/** 道教文化：道教常识 + 经典导读合并，按日期倒序 */
+export function getHomeCultureShowcaseRows(max = 5): HomeShowcaseRow[] {
+  const knowledgeRows: HomeShowcaseRow[] = knowledgeList.map((k) => ({
+    id: `knowledge-${k.id}`,
+    title: k.title,
+    date: k.date,
+    href: `/culture/knowledge/${k.id}`,
+  }))
+  const classicRows: HomeShowcaseRow[] = classicList.map((c) => ({
+    id: `classic-${c.id}`,
+    title: c.title,
+    date: c.date,
+    href: `/culture/classics/${c.id}`,
+  }))
+  return [...knowledgeRows, ...classicRows].sort((a, b) => b.date.localeCompare(a.date)).slice(0, max)
+}
+
 /** 崂山太清宫介绍段落（青岛市辖区） */
 const TAIQING_DESC = [
   `崂山太清宫又称下清宫，始建于西汉建元元年（公元前140年），千百年来屡有兴废，为全国知名道教活动场所之一，在青岛崂山文化中地位尊崇。`,

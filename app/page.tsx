@@ -6,70 +6,25 @@ import Image from "next/image"
 import { HeroCarousel, heroCarouselSlides } from "@/components/home/hero-carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
-  newsList,
-  newsArticles,
-  policyList,
-  charityList,
-  knowledgeList,
-  classicList,
   templeEntries,
+  classicList,
+  policyList,
+  getHomeNewsShowcaseRows,
+  getHomePolicyShowcaseRows,
+  getHomeCharityShowcaseRows,
+  getHomeCultureShowcaseRows,
 } from "@/lib/data/qingdao-mock"
+import type { HomeShowcaseRow } from "@/lib/data/qingdao-mock"
 
-type ShowcaseRow = { id: string; title: string; date: string; href: string }
-
-const FALLBACK_NEWS_SHOWCASE: ShowcaseRow[] = [
-  { id: "1", title: "青岛市道教协会成功举办崂山文化节开幕式", date: "2025-04-18", href: "/news/1" },
-  { id: "2", title: "崂山太清宫开展春季慈善公益募捐活动", date: "2025-03-22", href: "/news/2" },
-  { id: "7", title: "崂山上清宫举行九九重阳祈福法会", date: "2024-10-11", href: "/news/7" },
-  { id: "5", title: "关于做好秋冬季宫观安全防火工作的通知", date: "2024-11-20", href: "/news/5" },
-]
-
-const FALLBACK_POLICY_SHOWCASE: ShowcaseRow[] = [
-  { id: "p1", title: "《宗教事务条例》在青岛道教活动场所贯彻学习摘要", date: "2024-11-01", href: "/policies/p1" },
-  { id: "p2", title: "青岛市民族宗教事务局关于加强宗教活动场所规范化管理的指导意见（节选）", date: "2024-08-18", href: "/policies/p2" },
-  { id: "p3", title: "青岛市民族宗教政策法规进社区宣讲活动学习纪要（市南·崂山片区）", date: "2024-06-06", href: "/policies/p3" },
-  { id: "p4", title: "青岛市道教协会信息公开与财务年度报告制度（摘要）", date: "2024-03-21", href: "/policies/p4" },
-]
-
-const FALLBACK_CHARITY_SHOWCASE: ShowcaseRow[] = [
-  { id: "c1", title: "青岛市道教协会冬日送暖走访慰问活动圆满结束", date: "2024-12-01", href: "/charity/c1" },
-  { id: "c2", title: "崂山道众爱心助学圆梦行动走进即墨乡村小学", date: "2024-09-05", href: "/charity/c2" },
-  { id: "c3", title: "重阳节敬老志愿服务走进市南区养老机构", date: "2024-10-10", href: "/charity/c3" },
-  { id: "c4", title: "海岸线环保志愿行：守护青岛蓝色家园", date: "2024-08-20", href: "/charity/c4" },
-]
-
-const FALLBACK_CULTURE_SHOWCASE: ShowcaseRow[] = [
-  { id: "k1", title: "道教基本概念：道、德、三清与阴阳平衡", date: "2024-07-10", href: "/culture/knowledge/k1" },
-  { id: "cl1", title: "《道德经》第一章至第五章导读（青岛公益讲座稿）", date: "2024-05-10", href: "/culture/classics/cl1" },
-  { id: "k2", title: "进观礼仪十则：在青岛宫观谒祖需要注意什么？", date: "2024-07-12", href: "/culture/knowledge/k2" },
-  { id: "cl2", title: "《南华真经·逍遥游》首节意象阐释", date: "2024-05-12", href: "/culture/classics/cl2" },
-]
-
-function rowsFromNewsArticles(): ShowcaseRow[] {
-  const pairs = Object.entries(newsArticles)
-  if (pairs.length === 0) return FALLBACK_NEWS_SHOWCASE
-  return pairs
-    .map(([id, article]) => ({
-      id,
-      title: article.title,
-      date: article.date,
-      href: `/news/${id}`,
-    }))
-    .sort((a, b) => b.date.localeCompare(a.date))
-}
-
-const associationIntroBrief =
-  "青岛市道教协会成立于1993年，是在青岛市民政局注册、由市民族宗教事务部门业务主管的全市性道教团体。协会团结带领青岛市道教界人士和信教群众，坚持我国宗教中国化方向，依法开展教务活动，服务青岛市经济社会发展大局，传承优秀传统文化，积极开展公益慈善事业。"
-
-function ShowcaseTabList({ rows }: { rows: ShowcaseRow[] }) {
-  const data = rows.slice(0, 5)
-  if (data.length === 0) {
+function ShowcaseTabList({ rows }: { rows: HomeShowcaseRow[] }) {
+  if (!rows || rows.length === 0) {
     return (
-      <ul className="rounded-md border border-border border-dashed border-muted-foreground/40 p-4 text-sm text-muted-foreground">
-        <li>暂无列表数据</li>
-      </ul>
+      <div className="rounded-md border border-dashed border-muted-foreground/30 py-8 text-center text-sm text-muted-foreground">
+        暂无相关数据
+      </div>
     )
   }
+  const data = rows.slice(0, 5)
   return (
     <ul className="divide-y divide-border overflow-hidden rounded-md border border-border">
       {data.map((item) => (
@@ -87,6 +42,9 @@ function ShowcaseTabList({ rows }: { rows: ShowcaseRow[] }) {
     </ul>
   )
 }
+
+const associationIntroBrief =
+  "青岛市道教协会成立于1993年，是在青岛市民政局注册、由市民族宗教事务部门业务主管的全市性道教团体。协会团结带领青岛市道教界人士和信教群众，坚持我国宗教中国化方向，依法开展教务活动，服务青岛市经济社会发展大局，传承优秀传统文化，积极开展公益慈善事业。"
 
 function TwinBannerStripe({ href, ariaLabel }: { href: string; ariaLabel: string }) {
   return (
@@ -111,53 +69,10 @@ export default function HomePage() {
   const [carouselCaptionIndex, setCarouselCaptionIndex] = useState(0)
   const [showcaseTab, setShowcaseTab] = useState<"news" | "policy" | "charity" | "culture">("news")
 
-  const newsShowcaseRows = useMemo(() => {
-    const fromArticles = rowsFromNewsArticles().slice(0, 5)
-    if (fromArticles.length > 0) return fromArticles
-    const fromList = newsList
-      .map((n) => ({ id: n.id, title: n.title, date: n.date, href: `/news/${n.id}` }))
-      .sort((a, b) => b.date.localeCompare(a.date))
-      .slice(0, 5)
-    if (fromList.length > 0) return fromList
-    return FALLBACK_NEWS_SHOWCASE.slice(0, 5)
-  }, [newsList, newsArticles])
-
-  const policyShowcaseRows = useMemo(() => {
-    const rows = policyList.map((p) => ({
-      id: p.id,
-      title: p.title,
-      date: p.date,
-      href: `/policies/${p.id}`,
-    }))
-    return rows.length > 0 ? rows.slice(0, 5) : FALLBACK_POLICY_SHOWCASE.slice(0, 5)
-  }, [policyList])
-
-  const charityShowcaseRows = useMemo(() => {
-    const rows = charityList.map((c) => ({
-      id: c.id,
-      title: c.title,
-      date: c.date,
-      href: `/charity/${c.id}`,
-    }))
-    return rows.length > 0 ? rows.slice(0, 5) : FALLBACK_CHARITY_SHOWCASE.slice(0, 5)
-  }, [charityList])
-
-  const cultureShowcaseRows = useMemo(() => {
-    const kRows = knowledgeList.map((k) => ({
-      id: `k-${k.id}`,
-      title: k.title,
-      date: k.date,
-      href: `/culture/knowledge/${k.id}`,
-    }))
-    const cRows = classicList.map((c) => ({
-      id: `cl-${c.id}`,
-      title: c.title,
-      date: c.date,
-      href: `/culture/classics/${c.id}`,
-    }))
-    const merged = [...kRows, ...cRows].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5)
-    return merged.length > 0 ? merged : FALLBACK_CULTURE_SHOWCASE.slice(0, 5)
-  }, [knowledgeList, classicList])
+  const newsShowcaseRows = useMemo(() => getHomeNewsShowcaseRows(5), [])
+  const policyShowcaseRows = useMemo(() => getHomePolicyShowcaseRows(5), [])
+  const charityShowcaseRows = useMemo(() => getHomeCharityShowcaseRows(5), [])
+  const cultureShowcaseRows = useMemo(() => getHomeCultureShowcaseRows(5), [])
 
   const showcaseMoreHref =
     showcaseTab === "news"
@@ -311,14 +226,18 @@ export default function HomePage() {
               </Link>
             </div>
             <ul className="max-h-[320px] space-y-2 overflow-auto pr-1 text-sm">
-              {policyList.map((policy) => (
-                <li key={policy.id}>
-                  <Link href={`/policies/${policy.id}`} className="flex gap-2 text-muted-foreground transition-colors hover:text-primary">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                    <span className="line-clamp-2">{policy.title}</span>
-                  </Link>
-                </li>
-              ))}
+              {!policyList || policyList.length === 0 ? (
+                <li className="py-6 text-center text-muted-foreground">暂无相关数据</li>
+              ) : (
+                policyList.map((policy) => (
+                  <li key={policy.id}>
+                    <Link href={`/policies/${policy.id}`} className="flex gap-2 text-muted-foreground transition-colors hover:text-primary">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                      <span className="line-clamp-2">{policy.title}</span>
+                    </Link>
+                  </li>
+                ))
+              )}
             </ul>
           </article>
 
@@ -467,18 +386,24 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className="flex gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {paintingSlides.map((paint) => (
-                  <Link
-                    key={paint.id}
-                    href={`/culture/classics/${paint.id}`}
-                    className="group w-[200px] shrink-0 overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
-                  >
-                    <div className="relative aspect-[4/5] bg-muted">
-                      <Image src="/images/taoist-culture.jpg" alt={paint.title} fill className="object-cover opacity-95 transition-opacity group-hover:opacity-85" sizes="200px" />
-                    </div>
-                    <div className="line-clamp-2 px-3 py-2 text-[11px] text-card-foreground">{paint.title}</div>
-                  </Link>
-                ))}
+                {paintingSlides.length === 0 ? (
+                  <div className="w-full rounded-md border border-dashed border-muted-foreground/30 py-8 text-center text-sm text-muted-foreground">
+                    暂无相关数据
+                  </div>
+                ) : (
+                  paintingSlides.map((paint) => (
+                    <Link
+                      key={paint.id}
+                      href={`/culture/classics/${paint.id}`}
+                      className="group w-[200px] shrink-0 overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
+                    >
+                      <div className="relative aspect-[4/5] bg-muted">
+                        <Image src="/images/taoist-culture.jpg" alt={paint.title} fill className="object-cover opacity-95 transition-opacity group-hover:opacity-85" sizes="200px" />
+                      </div>
+                      <div className="line-clamp-2 px-3 py-2 text-[11px] text-card-foreground">{paint.title}</div>
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
           </div>
