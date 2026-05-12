@@ -1,0 +1,136 @@
+"use client"
+
+import { useState, useEffect, useCallback } from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+/** 导出供首页要闻区底部标题条等复用文案 */
+export const heroCarouselSlides = [
+  {
+    image: "/images/banner-1.jpg",
+    title: "弘道扬德 济世利人",
+    subtitle: "青岛市道教协会欢迎您",
+  },
+  {
+    image: "/images/banner-2.jpg",
+    title: "崂山文化节",
+    subtitle: "青岛市道教协会与您共襄文化盛会",
+  },
+  {
+    image: "/images/banner-3.jpg",
+    title: "传承经典 开拓创新",
+    subtitle: "弘扬道教优秀传统文化",
+  },
+]
+
+type HeroCarouselProps = {
+  /** 嵌入双栏要闻区时使用固定高度 */
+  embedded?: boolean
+  /** 轮播切换回调：用于同步底部导读标题 */
+  onSlideChange?: (index: number) => void
+}
+
+export function HeroCarousel({ embedded = false, onSlideChange }: HeroCarouselProps) {
+  const [current, setCurrent] = useState(0)
+
+  const next = useCallback(() => {
+    setCurrent((c) => (c + 1) % heroCarouselSlides.length)
+  }, [])
+
+  const prev = useCallback(() => {
+    setCurrent((c) => (c - 1 + heroCarouselSlides.length) % heroCarouselSlides.length)
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(next, 5000)
+    return () => clearInterval(timer)
+  }, [next])
+
+  useEffect(() => {
+    onSlideChange?.(current)
+  }, [current, onSlideChange])
+
+  return (
+    <section
+      className={
+        embedded
+          ? "relative h-[280px] overflow-hidden rounded-lg md:h-[360px]"
+          : "relative h-[50vh] overflow-hidden md:h-[70vh] lg:h-[80vh]"
+      }
+    >
+      {heroCarouselSlides.map((slide, i) => (
+        <div
+          key={i}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            i === current ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            className="object-cover"
+            priority={i === 0}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        </div>
+      ))}
+
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+        <div className="space-y-4">
+          {/* Decorative top */}
+          <div className="mx-auto flex items-center justify-center gap-3">
+            <span className="h-px w-12 bg-accent md:w-20" />
+            <span className="h-2 w-2 rotate-45 bg-accent" />
+            <span className="h-px w-12 bg-accent md:w-20" />
+          </div>
+
+          <h1 className="text-3xl font-bold tracking-[0.2em] text-primary-foreground drop-shadow-lg md:text-5xl lg:text-6xl">
+            {heroCarouselSlides[current].title}
+          </h1>
+          <p className="text-base tracking-wider text-primary-foreground/80 drop-shadow md:text-xl">
+            {heroCarouselSlides[current].subtitle}
+          </p>
+
+          {/* Decorative bottom */}
+          <div className="mx-auto flex items-center justify-center gap-3">
+            <span className="h-px w-12 bg-accent md:w-20" />
+            <span className="h-2 w-2 rotate-45 bg-accent" />
+            <span className="h-px w-12 bg-accent md:w-20" />
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-primary-foreground/30 bg-primary/30 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-primary/60 md:left-8"
+        aria-label="上一张"
+      >
+        <ChevronLeft size={24} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-primary-foreground/30 bg-primary/30 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-primary/60 md:right-8"
+        aria-label="下一张"
+      >
+        <ChevronRight size={24} />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-3">
+        {heroCarouselSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-2 rounded-full transition-all ${
+              i === current ? "w-8 bg-accent" : "w-2 bg-primary-foreground/50"
+            }`}
+            aria-label={`切换到第${i + 1}张`}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}
