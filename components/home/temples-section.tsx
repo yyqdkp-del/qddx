@@ -14,7 +14,7 @@ export function TemplesSection() {
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle title="宫观风采" subtitle="崂山太清宫 · 上清宫 · 太平宫" />
+        <SectionTitle title="宫观风采" subtitle="TAOIST TEMPLES" />
 
         <div className="grid gap-6 md:grid-cols-3">
           {temples.map((temple) => (

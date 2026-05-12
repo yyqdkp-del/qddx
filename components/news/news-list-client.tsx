@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Calendar, Tag, ArrowRight } from "lucide-react"
 import { newsCategories, newsList } from "@/lib/data/qingdao-mock"
 
-/** 新闻动态客户端列表：数据来自本站新闻资料库 */
+/** 新闻动态客户端列表：数据源统一来自青岛市本地化 Mock */
 export function NewsListClient() {
   const categories = [...newsCategories]
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? "全部")

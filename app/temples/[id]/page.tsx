@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: TempleDetailPageProps): Promi
   const excerpt = temple?.description[0]?.slice(0, 110)
   return {
     title: temple ? `${temple.name} - 青岛市道教协会` : "宫观详情 - 青岛市道教协会",
-    description: excerpt ?? "青岛市崂山道教宫观风貌介绍。",
+    description: excerpt ?? "青岛市道教活动场所宫观风貌介绍（示意数据）。",
   }
 }
 

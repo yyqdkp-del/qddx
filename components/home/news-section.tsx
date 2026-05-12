@@ -3,8 +3,8 @@ import { SectionTitle } from "@/components/section-title"
 import { ArrowRight } from "lucide-react"
 import { newsArticles, newsList } from "@/lib/data/qingdao-mock"
 
-function homeNewsPreview() {
-  return Object.entries(newsArticles)
+function previewFromArticles() {
+  const rows = Object.entries(newsArticles)
     .map(([id, article]) => {
       const row = newsList.find((n) => n.id === id)
       return {
@@ -16,11 +16,12 @@ function homeNewsPreview() {
       }
     })
     .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 4)
+  if (rows.length > 0) return rows.slice(0, 4)
+  return newsList.slice(0, 4)
 }
 
 export function NewsSection() {
-  const newsItems = homeNewsPreview()
+  const newsItems = previewFromArticles()
 
   return (
     <section className="bg-secondary py-16 md:py-24">

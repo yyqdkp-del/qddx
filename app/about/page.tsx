@@ -1,6 +1,5 @@
 import { PageBanner } from "@/components/page-banner"
 import { SectionTitle } from "@/components/section-title"
-import { districtBranches } from "@/lib/data/qingdao-mock"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -8,12 +7,12 @@ export const metadata: Metadata = {
   description: "了解青岛市道教协会的简介、领导班子、协会章程和历史沿革。",
 }
 
-/** 领导班子（示例职务分工，以主管机关核定为准） */
+/** 领导班子示意名单（青岛市道教团体） */
 const leaders = [
-  { name: "赵明一", title: "会长", desc: "主持青岛市道教协会全面工作，兼任崂山太清宫主要教务协调。" },
-  { name: "钱守真", title: "副会长", desc: "分管崂山上清宫片区法务示范与教职人员教育。" },
-  { name: "孙崇德", title: "副会长", desc: "分管全市宫观规范化建设、安全防火督导。" },
-  { name: "周济民", title: "秘书长", desc: "负责协会秘书处日常运转及与市、区有关部门联络。" },
+  { name: "张道长", title: "会长", desc: "全真龙门派崂山宗坛代表，崂山太清宫住持（青岛市辖区内）" },
+  { name: "李道长", title: "副会长", desc: "青岛市道教教务工作骨干，崂山上清宫住持" },
+  { name: "王道长", title: "副会长", desc: "青岛市道教协会常务理事，协助推进全市宫观规范管理" },
+  { name: "陈道长", title: "秘书长", desc: "负责青岛市道教协会日常运转与对上对下联络协调" },
 ]
 
 const timeline = [
@@ -38,10 +37,10 @@ export default function AboutPage() {
       {/* Introduction */}
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4">
-          <SectionTitle title="协会简介" subtitle="走进青岛市道教协会" />
+          <SectionTitle title="协会简介" subtitle="INTRODUCTION" />
           <div className="space-y-4 text-base leading-relaxed text-foreground/90">
             <p>
-              青岛市道教协会成立于1993年，是在青岛市民政局登记注册、青岛市民族宗教事务局为业务主管单位的全市性道教团体。协会通讯联络地址：青岛市市南区太平路19号；主要法务活动分布于崂山太清宫、上清宫、太平宫等场所。
+              青岛市道教协会成立于1993年，是在青岛市民政局登记注册、青岛市民族宗教事务局为业务主管单位的全市性道教团体。协会会址设于崂山太清宫。
             </p>
             <p>
               {"协会以邓小平理论、\u201C三个代表\u201D重要思想、科学发展观和习近平新时代中国特色社会主义思想为指导，遵守宪法、法律、法规和规章，践行社会主义核心价值观，维护祖国统一、民族团结、社会和谐。"}
@@ -61,7 +60,7 @@ export default function AboutPage() {
       {/* Leaders */}
       <section id="leaders" className="bg-secondary py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="领导班子" subtitle="会务与教务分工" />
+          <SectionTitle title="领导班子" subtitle="LEADERSHIP" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {leaders.map((leader) => (
               <div
@@ -83,7 +82,7 @@ export default function AboutPage() {
       {/* Charter */}
       <section id="charter" className="py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4">
-          <SectionTitle title="协会章程" subtitle="章程摘要" />
+          <SectionTitle title="协会章程" subtitle="CHARTER" />
           <div className="rounded-lg border border-border bg-card p-6 shadow-sm md:p-8">
             <h3 className="mb-4 text-center text-lg font-bold text-card-foreground">
               青岛市道教协会章程（摘要）
@@ -91,7 +90,9 @@ export default function AboutPage() {
             <div className="space-y-4 text-sm leading-relaxed text-card-foreground/80">
               <div>
                 <h4 className="mb-2 font-semibold text-primary">第一章 总则</h4>
-                <p>第一条：本会名称为青岛市道教协会；对外联系文件中可使用规范汉语全称，必要时附汉语拼音译名。</p>
+                <p>
+                  第一条：本会名称为青岛市道教协会，英文译名为Qingdao Taoist Association。
+                </p>
                 <p>
                   第二条：本会是青岛市道教界的爱国宗教团体和非营利性社会组织。
                 </p>
@@ -118,32 +119,10 @@ export default function AboutPage() {
 
       <div className="cloud-divider" />
 
-      <section id="district-branches" className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="各级协会" subtitle="青岛市辖区区市联络片区分工" />
-          <p className="mx-auto mb-10 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
-            根据青岛市行政区划，协会在市南区、市北区、李沧区、崂山区、城阳区、西海岸新区、即墨区、胶州市、平度市、莱西市设立工作联络说明，便于宫观、信众与秘书处对口沟通（以下为网站展示用职能分工说明）。
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {districtBranches.map((d) => (
-              <article
-                key={d.name}
-                className="rounded-lg border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <h3 className="border-b border-border pb-2 text-base font-bold text-primary">{d.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-card-foreground/85">{d.scope}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="cloud-divider" />
-
       {/* History Timeline */}
       <section id="history" className="bg-secondary py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4">
-          <SectionTitle title="历史沿革" subtitle="大事记略" />
+          <SectionTitle title="历史沿革" subtitle="HISTORY" />
           <div className="relative">
             {/* Vertical line */}
             <div className="absolute left-6 top-0 h-full w-px bg-accent/40 md:left-1/2" />

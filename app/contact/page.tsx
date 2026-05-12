@@ -13,7 +13,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "地址",
-    details: ["青岛市市南区太平路19号", "青岛市道教协会秘书处（同一地址通信）"],
+    details: ["青岛市市南区太平路19号", "（天后宫院内 · 协会联系地址示意）"],
   },
   {
     icon: Phone,
@@ -43,7 +43,7 @@ export default function ContactPage() {
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="联系方式" subtitle="地址、电话与在线留言" />
+          <SectionTitle title="联系方式" subtitle="CONTACT US" />
 
           {/* Contact Info Cards */}
           <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -70,7 +70,7 @@ export default function ContactPage() {
 
           {/* Map and Form */}
           <div className="grid gap-10 lg:grid-cols-2">
-            {/* 地图 */}
+            {/* Map placeholder */}
             <div>
               <h3 className="mb-4 text-lg font-bold text-foreground">交通指引</h3>
               <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border bg-muted">

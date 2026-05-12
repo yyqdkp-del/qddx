@@ -6,7 +6,8 @@ import { useEffect, useState } from "react"
 import { ChevronDown, Menu, Search, X } from "lucide-react"
 
 /**
- * 主导航：青岛市道教协会网站信息架构（频道与本地宫观入口）。
+ * 主导航数据：与山东省道教协会官网导航标题、下拉子项顺序 1:1 对齐，
+ * href 映射到本站对应路由（青岛市本地化内容）。
  */
 type NavDropdownItem = { label: string; href: string }
 type NavMainItem =
@@ -23,7 +24,7 @@ const mainNavigation: NavMainItem[] = [
       { label: "领导班子", href: "/about#leaders" },
       { label: "协会章程", href: "/about#charter" },
       { label: "历史沿革", href: "/about#history" },
-      { label: "各级协会", href: "/about#district-branches" },
+      { label: "各级协会", href: "/contact" },
     ],
   },
   {
@@ -58,14 +59,26 @@ const mainNavigation: NavMainItem[] = [
     ],
   },
   {
-    label: "道教宫观",
+    label: "山东道观",
     href: "/temples",
     matchPrefix: true,
     children: [
-      { label: "宫观风采一览", href: "/temples" },
-      { label: "崂山太清宫", href: "/temples/taiqing" },
-      { label: "崂山上清宫", href: "/temples/shangqing" },
-      { label: "崂山太平宫", href: "/temples/taiping" },
+      { label: "济南道观", href: "#jingnan" },
+      { label: "青岛道观", href: "/temples" },
+      { label: "淄博道观", href: "#zibo" },
+      { label: "枣庄道观", href: "#zaozhuang" },
+      { label: "东营道观", href: "#dongying" },
+      { label: "烟台道观", href: "#yantai" },
+      { label: "潍坊道观", href: "#weifang" },
+      { label: "济宁道观", href: "#jining" },
+      { label: "泰安道观", href: "#taian" },
+      { label: "威海道观", href: "#weihai" },
+      { label: "日照道观", href: "#rizhao" },
+      { label: "临沂道观", href: "#linyi" },
+      { label: "德州道观", href: "#dezhou" },
+      { label: "聊城道观", href: "#liaocheng" },
+      { label: "滨州道观", href: "#binzhou" },
+      { label: "菏泽道观", href: "#heze" },
     ],
   },
   {
@@ -119,8 +132,15 @@ function isNavActive(item: NavMainItem, pathname: string): boolean {
   return false
 }
 
-/** 下拉子项链接 */
+/** 占位锚点外链：其他城市道观无本地页面时禁用跳转，结构与省道协菜单一致保留字样 */
 function NavDropdownLink({ item }: { item: NavDropdownItem }) {
+  if (item.href.startsWith("#") && item.href.length > 1) {
+    return (
+      <span className="block cursor-default rounded-md px-3 py-2 text-sm opacity-70" title={`${item.label}（占位，青岛市站仅录入本地宫观数据）`}>
+        {item.label}
+      </span>
+    )
+  }
   return (
     <Link href={item.href} className="block rounded-md px-3 py-2 text-sm text-card-foreground transition-colors hover:bg-muted hover:text-primary">
       {item.label}
@@ -128,7 +148,7 @@ function NavDropdownLink({ item }: { item: NavDropdownItem }) {
   )
 }
 
-/** 顶部工具条：日期、属地、站内搜索 */
+/** 顶部 Logo 区：日历、属地、站内搜索表单（结构与省道协顶部工具条一致） */
 function HeaderToolbar() {
   const d = new Date()
   const dateStr = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
@@ -148,7 +168,7 @@ function HeaderToolbar() {
           </span>
           <span className="font-medium tracking-wide text-primary">青岛</span>
         </div>
-        {/* 关键字检索（静态站点不提交跳转） */}
+        {/* 对标省外站关键字检索框——本站为静态演示，阻止默认跳转 */}
         <form
           role="search"
           className="flex min-w-[200px] max-w-xs flex-1 items-center gap-2 sm:flex-initial md:max-w-md"
@@ -196,7 +216,7 @@ export function SiteHeader() {
             <TaoistLogo />
             <div className="flex flex-col">
               <span className="text-lg font-bold leading-tight tracking-wider lg:text-xl">青岛市道教协会</span>
-              <span className="hidden text-[10px] tracking-[0.3em] opacity-70 sm:block">青岛市道教协会门户网站</span>
+              <span className="hidden text-[10px] tracking-[0.3em] opacity-70 sm:block">对标山东省道教协会站信息架构 · 青岛市辖区</span>
             </div>
           </Link>
 
@@ -221,8 +241,10 @@ export function SiteHeader() {
                   )
                 }
 
+                const wide = item.label === "山东道观"
+
                 return (
-                  <li key={item.label} className="group relative">
+                  <li key={item.label} className={`group relative ${wide ? "" : ""}`}>
                     <div className="flex items-center gap-0.5">
                       <Link
                         href={item.href}
@@ -236,9 +258,13 @@ export function SiteHeader() {
                     </div>
                     {active && <span className="pointer-events-none absolute bottom-0 left-1/2 z-10 h-0.5 w-6 -translate-x-1/2 rounded-full bg-accent" />}
                     <div className="invisible absolute left-0 top-full z-40 pt-1 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
-                      <div className="min-w-[200px] rounded-md border border-border bg-card p-2 text-left text-card-foreground shadow-lg">
+                      <div
+                        className={`rounded-md border border-border bg-card shadow-lg ${
+                          wide ? "columns-2 gap-x-0 p-2 sm:columns-3 md:columns-4" : "min-w-[180px] p-2"
+                        } text-left text-card-foreground`}
+                      >
                         {item.children.map((child) => (
-                          <div key={child.label}>
+                          <div key={child.label} className={wide ? "mb-1 break-inside-avoid" : undefined}>
                             <NavDropdownLink item={child} />
                           </div>
                         ))}
@@ -284,9 +310,13 @@ export function SiteHeader() {
                         </Link>
                         {item.children.map((child) => (
                           <div key={child.label} className="border-b border-primary-foreground/5 last:border-0">
-                            <Link href={child.href} className="block py-2 pl-4 text-xs hover:text-accent" onClick={() => setMobileOpen(false)}>
-                              {child.label}
-                            </Link>
+                            {child.href.startsWith("#") ? (
+                              <span className="block py-2 pl-4 text-xs opacity-60">{child.label}</span>
+                            ) : (
+                              <Link href={child.href} className="block py-2 pl-4 text-xs hover:text-accent" onClick={() => setMobileOpen(false)}>
+                                {child.label}
+                              </Link>
+                            )}
                           </div>
                         ))}
                       </div>

@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "宫观风采 - 青岛市道教协会",
-  description: "展示青岛市崂山核心道教活动场所：崂山太清宫、崂山上清宫、崂山太平宫。",
+  description: "展示青岛市辖区内代表性道教活动场所：崂山太清宫、崂山上清宫、崂山太平宫与天后宫妈祖文化地标。",
 }
 
 /** 宫观风采列表页：沿用首页三张卡片同款栅格卡片样式（扩展为四字宫观） */
@@ -19,9 +19,9 @@ export default function TemplesPage() {
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <SectionTitle title="青岛市宫观一览" subtitle="崂山三大古道场" />
+          <SectionTitle title="青岛市宫观一览" subtitle="TAOIST TEMPLES IN QINGDAO" />
           <p className="text-base leading-relaxed text-foreground/80">
-            青岛市依山傍海，崂山自古为道教名山。下列为青岛市辖区内最具代表性的三座道教宫观：太清宫、上清宫、太平宫，均位于崂山风景区内，是了解青岛道教文化的重要窗口。
+            青岛市依山傍海，崂山是著名的道教名山。全市依法登记的道教活动场所分布在崂山风景区与老城区岸线一带。下列为青岛市辖区内具有代表性的道教文化传承节点（本站示意数据）。
           </p>
         </div>
       </section>

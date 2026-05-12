@@ -6,7 +6,7 @@ export function IntroSection() {
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle title="协会简介" subtitle="青岛市道教协会" />
+        <SectionTitle title="协会简介" subtitle="ABOUT US" />
 
         <div className="grid items-center gap-10 lg:grid-cols-2">
           {/* Text */}

@@ -13,8 +13,8 @@ export const heroCarouselSlides = [
   },
   {
     image: "/images/banner-2.jpg",
-    title: "崂山文化节",
-    subtitle: "青岛市道教协会与您共襄文化盛会",
+    title: "崂山仙境 道法自然",
+    subtitle: "探访千年道教圣地",
   },
   {
     image: "/images/banner-3.jpg",
@@ -24,7 +24,7 @@ export const heroCarouselSlides = [
 ]
 
 type HeroCarouselProps = {
-  /** 嵌入双栏要闻区时使用固定高度 */
+  /** 嵌入双栏要闻区时使用固定高度（对标省道协首页左侧轮播位） */
   embedded?: boolean
   /** 轮播切换回调：用于同步底部导读标题 */
   onSlideChange?: (index: number) => void

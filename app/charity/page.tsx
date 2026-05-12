@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "记录青岛市道教界参与赈灾助学、敬老环保等公益志愿服务实践。",
 }
 
-/** 慈善公益列表页（青岛市辖区公益活动） */
+/** 慈善公益列表页（青岛市辖区公益活动 Mock） */
 export default function CharityPage() {
   return (
     <>

@@ -86,12 +86,12 @@ const scriptures = [
 export default function CulturePage() {
   return (
     <>
-      <PageBanner title="道教文化" subtitle="传承千年智慧 · 弘扬优秀传统文化" image="/images/taoist-culture.jpg" />
+      <PageBanner title="道教文化" subtitle="传承千年智慧 弘扬道教文化（青岛市本地化展示）" image="/images/taoist-culture.jpg" />
 
       {/* 文化二级入口：常识列表 + 经典导读列表，结构与协会站信息架构对齐 */}
       <section className="bg-secondary py-12 md:py-16">
         <div className="mx-auto max-w-5xl px-4">
-          <SectionTitle title="文化专题导航" subtitle="道教常识与经典导读" />
+          <SectionTitle title="文化专题导航" subtitle="KNOWLEDGE & SCRIPTURES" />
 
           <div className="grid gap-6 md:grid-cols-2">
             <Link
@@ -104,7 +104,7 @@ export default function CulturePage() {
               <div className="min-w-0 text-left">
                 <h3 className="text-lg font-bold text-card-foreground group-hover:text-primary">道教常识</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  面向市民的日常礼仪、教义小常识与在青岛宫观谒祖提示，内容由青岛市道教协会整理供普法与文化宣传使用。
+                  面向市民的日常礼仪、教义小常识与在青岛宫观谒祖提示，内容由青岛市道教协会编发示例稿。
                 </p>
               </div>
             </Link>
@@ -130,7 +130,7 @@ export default function CulturePage() {
       {/* 养生之道 */}
       <section id="health" className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="养生之道" subtitle="动静结合 · 形神兼养" />
+          <SectionTitle title="养生之道" subtitle="HEALTH & WELLNESS" />
 
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="space-y-4">
@@ -168,7 +168,7 @@ export default function CulturePage() {
       {/* Art */}
       <section id="art" className="bg-secondary py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="道教艺术" subtitle="建筑 · 音乐 · 书画" />
+          <SectionTitle title="道教艺术" subtitle="TAOIST ART" />
 
           <div className="grid gap-6 md:grid-cols-3">
             {artCards.map((item) => (
@@ -190,7 +190,7 @@ export default function CulturePage() {
       {/* Scriptures */}
       <section id="scripture" className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <SectionTitle title="经典文献" subtitle="道藏纲要" />
+          <SectionTitle title="经典文献" subtitle="SCRIPTURES & CLASSICS" />
 
           <div className="mx-auto max-w-4xl">
             <div className="mb-8 flex items-center gap-3">
