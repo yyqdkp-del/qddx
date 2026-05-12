@@ -45,18 +45,32 @@ function ShowcaseTabList({ rows }: { rows: HomeShowcaseRow[] }) {
 const associationIntroBrief =
   "青岛市道教协会成立于1993年，是在青岛市民政局注册、由市民族宗教事务部门业务主管的全市性道教团体。协会团结带领青岛市道教界人士和信教群众，坚持我国宗教中国化方向，依法开展教务活动，服务青岛市经济社会发展大局，传承优秀传统文化，积极开展公益慈善事业。"
 
-function TwinBannerStripe({ href, ariaLabel }: { href: string; ariaLabel: string }) {
+function TwinBannerStripe({
+  href,
+  ariaLabel,
+  title,
+  subtitle,
+}: {
+  href: string
+  ariaLabel: string
+  title: string
+  subtitle: string
+}) {
   return (
     <section className="border-y border-border/60 bg-muted/40 py-6">
       <div className="mx-auto max-w-7xl px-4">
         <Link
           href={href}
           aria-label={ariaLabel}
-          className="group block overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
+          className="group block overflow-hidden rounded-lg border-2 border-accent/50 bg-gradient-to-br from-primary via-primary to-primary/90 shadow-md transition-all hover:border-accent hover:shadow-lg"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="aspect-[21/9] bg-gradient-to-br from-muted to-secondary transition-opacity group-hover:opacity-95" />
-            <div className="aspect-[21/9] bg-gradient-to-bl from-secondary to-muted transition-opacity group-hover:opacity-95" />
+          <div className="px-6 py-10 text-center md:px-10 md:py-12">
+            <h3 className="text-xl font-bold tracking-wide text-primary-foreground md:text-2xl">{title}</h3>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:text-base">{subtitle}</p>
+            <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-accent transition-colors group-hover:text-accent/90">
+              <span>了解更多</span>
+              <span aria-hidden>→</span>
+            </span>
           </div>
         </Link>
       </div>
@@ -193,7 +207,12 @@ export default function HomePageClient({
         </div>
       </section>
 
-      <TwinBannerStripe href="/news" ariaLabel="横幅推广占位图（示意）跳转新闻中心" />
+      <TwinBannerStripe
+        href="/news"
+        ariaLabel="尊道贵德正己化人，进入新闻中心"
+        title="尊道贵德 · 正己化人"
+        subtitle="弘扬中华优秀传统文化，共筑和谐社会"
+      />
 
       {/* ② 协会概况三列：简介 / 规章制度 / 服务大厅（结构与省道协 .ABOUT 三宫格对齐） */}
       <section className="bg-muted/30 py-10 md:py-12">
@@ -253,30 +272,45 @@ export default function HomePageClient({
             <div className="grid gap-4 sm:grid-cols-2">
               <Link
                 href="/policies"
-                className="group flex flex-col overflow-hidden rounded-lg border border-border bg-secondary/40 transition-all hover:border-accent/50 hover:shadow-md"
+                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
               >
-                <div className="aspect-[16/11] bg-muted transition-colors group-hover:bg-muted/80" />
-                <div className="flex flex-1 flex-col justify-center px-4 py-3">
-                  <h4 className="text-sm font-bold text-card-foreground">文件下载</h4>
-                  <p className="mt-1 text-[11px] text-muted-foreground">文件下载</p>
+                <div>
+                  <h4 className="text-base font-bold text-card-foreground">规范化管理表格与制度</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    提供《宗教事务条例》、教职人员认定表格、活动场所登记等常用文件与表格的在线下载服务。
+                  </p>
                 </div>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors group-hover:text-accent">
+                  立即前往
+                  <span aria-hidden>→</span>
+                </span>
               </Link>
               <Link
                 href="/contact"
-                className="group flex flex-col overflow-hidden rounded-lg border border-border bg-secondary/40 transition-all hover:border-accent/50 hover:shadow-md"
+                className="group flex min-h-[220px] flex-col justify-between rounded-lg border border-border bg-white/80 p-6 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
               >
-                <div className="aspect-[16/11] bg-muted transition-colors group-hover:bg-muted/80" />
-                <div className="flex flex-1 flex-col justify-center px-4 py-3">
-                  <h4 className="text-sm font-bold text-card-foreground">信息查询</h4>
-                  <p className="mt-1 text-[11px] text-muted-foreground">信息查询</p>
+                <div>
+                  <h4 className="text-base font-bold text-card-foreground">教务与公益信息公示</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    支持青岛市正规道教活动场所、合法教职人员及道教公益慈善项目的信息公开与真伪查询。
+                  </p>
                 </div>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors group-hover:text-accent">
+                  立即前往
+                  <span aria-hidden>→</span>
+                </span>
               </Link>
             </div>
           </article>
         </div>
       </section>
 
-      <TwinBannerStripe href="/policies" ariaLabel="腰栏横幅占位跳转政策法规频道" />
+      <TwinBannerStripe
+        href="/policies"
+        ariaLabel="海上名山崂山道教文化，进入政策法规"
+        title="海上名山第一 · 仙山胜境"
+        subtitle="青岛市道教协会带您走进崂山道教文化"
+      />
 
       {/* ③ 山东道观 + 道教音乐（结构与省道协 .district 左右两栏对齐；左侧标题保留「山东道观」字面以符合 1:1 栏目口径） */}
       <section className="bg-background py-10 md:py-12">
@@ -350,7 +384,12 @@ export default function HomePageClient({
         </div>
       </section>
 
-      <TwinBannerStripe href="/charity" ariaLabel="腰栏横幅占位跳转公益慈善一览" />
+      <TwinBannerStripe
+        href="/charity"
+        ariaLabel="尊道贵德正己化人，进入公益慈善"
+        title="尊道贵德 · 正己化人"
+        subtitle="弘扬中华优秀传统文化，共筑和谐社会"
+      />
 
       {/* ④ 玄门仙踪 + 道教书画（结构与省道协 .district-1 对应） */}
       <section className="bg-muted/30 py-10 md:py-12">
@@ -409,7 +448,12 @@ export default function HomePageClient({
         </div>
       </section>
 
-      <TwinBannerStripe href="/culture" ariaLabel="腰栏横幅占位跳转道教文化总览" />
+      <TwinBannerStripe
+        href="/culture"
+        ariaLabel="海上名山崂山道教文化，进入道教文化"
+        title="海上名山第一 · 仙山胜境"
+        subtitle="青岛市道教协会带您走进崂山道教文化"
+      />
 
       {/* ⑤ 齐鲁仙界：标题字面与省道协一致；展示青岛风景占位图组 */}
       <section className="bg-background pb-12 pt-10">
